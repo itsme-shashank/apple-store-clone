@@ -35,6 +35,7 @@ To host it, upload the folder to any static host:
 | `saves.html` | Products saved for later |
 | `support.html` | Topic shortcuts and a searchable FAQ, including Halo Care+, Trade In, Education, Entertainment, Accessories and Gift Cards |
 | `entertainment.html` | Halo TV+ carousel, Halo Music album shelf, Halo Arcade game shelf, and the entertainment devices; the menu's "More from Entertainment" links jump to each section |
+| `legal.html` | Privacy policy, terms of use, sales policy, legal notice and a site map built from the catalogue (linked from the footer) |
 
 ## Features
 
@@ -54,7 +55,7 @@ To host it, upload the folder to any static host:
 - Panels leave the way they came in, and popups grow out of the button that opened them
 
 **Accessibility**
-- Follows the system's light/dark mode, reduced motion, reduced transparency and higher contrast settings
+- A Light / Dark / Auto switch in the top bar (remembered per browser; Auto follows the system), plus the system's reduced motion, reduced transparency and higher contrast settings
 - Keyboard support for menus, carousels and option pickers, a skip link, and screen‑reader labels on controls
 
 **State.** The bag, saves and remembered PIN code are stored in `localStorage` (in each visitor's own browser) and stay in sync across open tabs.
@@ -63,14 +64,14 @@ To host it, upload the folder to any static host:
 
 ```
 ├── index.html, store.html, product.html, compare.html,
-│   bag.html, saves.html, support.html, entertainment.html
+│   bag.html, saves.html, support.html, entertainment.html, legal.html
 ├── css/styles.css     # design tokens, components, light/dark and accessibility media queries
 ├── js/
 │   ├── data.js        # catalogue, prices, trade-in values, menus, shows, albums, games — edit this to change the store
 │   ├── art.js         # SVG product illustrations
 │   ├── motion.js      # spring physics, momentum projection, rubber-banding, drag helper
 │   ├── app.js         # shared shell: nav, dropdowns, bag, saves, popups, toasts, footer
-│   └── home.js, store.js, product.js, compare.js, bag.js, saves.js, support.js, entertainment.js
+│   └── home.js, store.js, product.js, compare.js, bag.js, saves.js, support.js, entertainment.js, legal.js
 ├── docs/screenshots/
 └── favicon.svg
 ```

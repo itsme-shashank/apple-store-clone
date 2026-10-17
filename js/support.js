@@ -147,6 +147,10 @@ Pages.support = () => {
     if (e.target.closest('[data-contact]')) toast('This is a demo store — support requests aren’t sent anywhere.');
   });
 
+  // ?q= opens the page already filtered, e.g. from the nav's "Helpful Topics"
+  const preset = new URLSearchParams(location.search).get('q');
+  if (preset) { input.value = preset; input.dispatchEvent(new Event('input')); }
+
   // Sections are rendered here, after the browser's own jump to the #hash, so scroll to it now
   if (location.hash) {
     const target = document.getElementById(location.hash.slice(1));

@@ -35,8 +35,9 @@
   color-scheme: light dark;
 }
 
+/* Theme: Auto follows the system; data-theme="light" / "dark" on <html> is the visitor's explicit choice */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #000000;
     --bg-alt: #101012;
     --card: #1c1c1e;
@@ -58,6 +59,29 @@
     --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.6);
   }
 }
+:root[data-theme="dark"] {
+  --bg: #000000;
+  --bg-alt: #101012;
+  --card: #1c1c1e;
+  --text: #f5f5f7;
+  --text-2: #a1a1a6;
+  --text-3: #86868b;
+  --line: #424245;
+  --link: #2997ff;
+  --accent: #0a84ff;
+  --accent-press: #0071e3;
+  --ok: #30d158;
+  --error: #ff453a;
+  --nav-bg: rgba(22, 22, 23, 0.72);
+  --panel-bg: rgba(22, 22, 23, 0.88);
+  --sheet-bg: rgba(28, 28, 30, 0.82);
+  --scrim: rgba(0, 0, 0, 0.55);
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+:root[data-theme="light"] { color-scheme: light; }
 
 /* =========================================================
    Base & typography (size-specific tracking & leading)
@@ -118,7 +142,8 @@ ul { list-style: none; }
   font-weight: 600;
   color: #bf4800;
 }
-@media (prefers-color-scheme: dark) { .eyebrow { color: #ff9f4a; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .eyebrow { color: #ff9f4a; } }
+:root[data-theme="dark"] .eyebrow { color: #ff9f4a; }
 .muted { color: var(--text-2); }
 .fine { font-size: 0.75rem; line-height: 1.4; letter-spacing: 0.006em; color: var(--text-2); }
 .wrap { width: min(var(--wrap), 100% - var(--gutter) * 2); margin-inline: auto; }
@@ -691,13 +716,13 @@ main { padding-top: var(--nav-h); display: block; }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  :root { --nav-bg: var(--bg); --panel-bg: var(--bg); --sheet-bg: var(--bg); }
+  :root, :root[data-theme] { --nav-bg: var(--bg); --panel-bg: var(--bg); --sheet-bg: var(--bg); }
   .gnav, .gnav-panel, .sheet, .toolbar, .local-nav, .toast, .confirm-card { -webkit-backdrop-filter: none; backdrop-filter: none; }
   .toast { background: #1d1d1f; }
 }
 
 @media (prefers-contrast: more) {
-  :root { --text-2: var(--text); --line: var(--text); --nav-bg: var(--bg); --sheet-bg: var(--bg); --panel-bg: var(--bg); }
+  :root, :root[data-theme] { --text-2: var(--text); --line: var(--text); --nav-bg: var(--bg); --sheet-bg: var(--bg); --panel-bg: var(--bg); }
   .gnav, .local-nav, .toolbar { border-bottom: 1px solid var(--text); }
   .card, .compare-card, .why-card { box-shadow: inset 0 0 0 1px var(--text); }
   .chip, .stepper, .icon-btn.round, .paddle { box-shadow: inset 0 0 0 1px var(--text); }
@@ -877,7 +902,8 @@ sup { line-height: 0; }
 .chap-art svg { height: 54px; width: auto; max-width: 80px; }
 .chap-art.icon svg { width: 34px; height: 34px; color: var(--text-2); }
 .chap em { font-style: normal; color: #bf4800; font-size: 0.6875rem; }
-@media (prefers-color-scheme: dark) { .chap em { color: #ff9f4a; } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .chap em { color: #ff9f4a; } }
+:root[data-theme="dark"] .chap em { color: #ff9f4a; }
 
 .engrave-preview {
   position: absolute; left: 50%; top: 73%; z-index: 2; pointer-events: none;
@@ -1075,7 +1101,8 @@ sup { line-height: 0; }
   .buybar, .cmp-pickers, .tv-dots, .tv-play { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
   .flyout-open .scrim { -webkit-backdrop-filter: none; backdrop-filter: none; }
 }
-@media (prefers-color-scheme: dark) { .promo-card.dark { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); } }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .promo-card.dark { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); } }
+:root[data-theme="dark"] .promo-card.dark { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); }
 
 /* =========================================================
    Entertainment page — service jump links, Music and Arcade shelves
@@ -1109,3 +1136,40 @@ sup { line-height: 0; }
 .game-copy p { color: rgba(255, 255, 255, 0.78); font-size: 0.9375rem; }
 .game-copy .album-kind { color: rgba(255, 255, 255, 0.7); margin-top: 0; }
 .game-copy .pill-btn { margin-top: 8px; }
+
+/* =========================================================
+   Appearance menu — Light / Dark / Auto, grows out of its button
+   ========================================================= */
+.theme-wrap { position: relative; }
+.theme-menu {
+  position: absolute; top: calc(100% + 6px); right: -6px; z-index: 120; min-width: 176px; padding: 6px;
+  /* Near-opaque: a backdrop blur can't reach the page from inside the nav's own blurred layer */
+  border-radius: 14px; background: color-mix(in srgb, var(--bg) 96%, var(--text)); box-shadow: var(--shadow-lg), inset 0 0 0 0.5px color-mix(in srgb, var(--text) 14%, transparent);
+  transform-origin: calc(100% - 28px) 0; opacity: 0; transform: scale(0.92); visibility: hidden;
+  transition: opacity 160ms var(--ease-in), transform 200ms var(--ease-in), visibility 0s 200ms;
+}
+.theme-menu.open { opacity: 1; transform: none; visibility: visible; transition: opacity 180ms var(--ease-out), transform 320ms var(--ease-out), visibility 0s; }
+.theme-label { padding: 6px 10px 4px; font-size: 0.75rem; font-weight: 600; color: var(--text-2); }
+.theme-opt { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 40px; padding: 0 10px; border-radius: 9px; font-size: 0.9375rem; text-align: left; }
+.theme-opt:hover, .theme-opt:focus-visible { background: color-mix(in srgb, var(--text) 8%, transparent); outline: none; }
+.theme-opt:active { background: color-mix(in srgb, var(--text) 13%, transparent); }
+.theme-opt svg { width: 18px; height: 18px; flex: none; }
+.theme-check { display: inline-flex; }
+.theme-opt .theme-check { margin-left: auto; color: var(--accent); opacity: 0; }
+.theme-opt[aria-checked="true"] .theme-check { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .theme-menu, .theme-menu.open { transform: none; transition: opacity 120ms, visibility 0s; } }
+
+/* =========================================================
+   Legal page — readable prose and a site map grid
+   ========================================================= */
+.legal { padding-bottom: clamp(48px, 7vw, 96px); }
+.legal-section { max-width: 72ch; margin: 0 auto; padding: 36px 0; border-top: 1px solid var(--line); }
+.legal-section h2 { font-size: 1.75rem; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 14px; }
+.legal-section p { color: var(--text-2); margin-top: 10px; }
+.legal-section .pill-link { min-height: 0; }
+#sitemap { max-width: none; }
+.sitemap { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr)); gap: 28px 24px; margin-top: 8px; }
+.sitemap h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 8px; }
+.sitemap li { font-size: 0.875rem; line-height: 1.9; }
+.sitemap a { color: var(--text-2); }
+.sitemap a:hover { color: var(--text); text-decoration: underline; }

@@ -26,7 +26,11 @@ const Icons = {
   bookmarkFill: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v16l-5-3.6L7 20z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
   compare: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="6" width="9" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="18" y="6" width="9" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
   pin: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 28s-8-8.5-8-14a8 8 0 0 1 16 0c0 5.5-8 14-8 14z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16" cy="14" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
-  gift: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="12" width="22" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h24M16 12v14M16 12c-3-6-8-4-6-1 1 1 6 1 6 1zm0 0c3-6 8-4 6-1-1 1-6 1-6 1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
+  gift: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="12" width="22" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 12h24M16 12v14M16 12c-3-6-8-4-6-1 1 1 6 1 6 1zm0 0c3-6 8-4 6-1-1 1-6 1-6 1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+  light: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  dark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+  auto: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 4.5a7.5 7.5 0 0 1 0 15z" fill="currentColor"/></svg>',
+  check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
 
 /* ---------------- Bag storage ---------------- */
@@ -256,7 +260,7 @@ function flyoutCols(key) {
     return [
       { label: 'Explore Support', big: true, links: [['support.html#phones', 'Phone'], ['support.html#book', 'Book'], ['support.html#pad', 'Pad'], ['support.html#watch', 'Watch'], ['support.html#vision', 'Vision'], ['support.html#audio', 'Audio & Home']] },
       { label: 'Get Help', links: [['support.html#orders', 'Orders & Delivery'], ['support.html#returns', 'Returns & Refunds'], ['support.html#payments', 'Payments & EMI'], ['support.html#contact', 'Contact Us']] },
-      { label: 'Helpful Topics', links: [['support.html', 'Transfer your data'], ['support.html', 'Battery health'], ['support.html', 'Repairs']] }
+      { label: 'Helpful Topics', links: [['support.html?q=transfer', 'Transfer your data'], ['support.html?q=battery', 'Battery health'], ['support.html#contact', 'Repairs']] }
     ];
   }
   const cat = CATEGORIES.find(c => c.id === key);
@@ -294,6 +298,7 @@ function breadcrumb() {
   else if (page === 'bag') crumbs.push([null, 'Bag']);
   else if (page === 'saves') crumbs.push([null, 'Your Saves']);
   else if (page === 'support') crumbs.push([null, 'Support']);
+  else if (page === 'legal') crumbs.push([null, 'Legal']);
   else if (page === 'entertainment') crumbs.push(['store.html?c=entertainment', 'Entertainment'], [null, 'Services']);
   if (!crumbs.length) return '';
   return `<nav class="crumbs" aria-label="Breadcrumb"><ol>
@@ -301,6 +306,75 @@ function breadcrumb() {
     ${crumbs.map(([h, t], i) => `<li>${h && i < crumbs.length - 1 ? `<a href="${h}">${esc(t)}</a>` : `<span aria-current="page">${esc(t)}</span>`}</li>`).join('')}
   </ol></nav>`;
 }
+
+/* ---------------- Appearance: Light / Dark / Auto ----------------
+   Auto removes data-theme so CSS follows the system; the head of every page applies a saved choice before first paint. */
+const Theme = (() => {
+  const KEY = 'halo-theme';
+  const options = [['light', 'Light'], ['dark', 'Dark'], ['auto', 'Auto']];
+  const metas = () => $$('meta[name="theme-color"]');
+  const read = () => { try { const v = localStorage.getItem(KEY); return v === 'light' || v === 'dark' ? v : 'auto'; } catch { return 'auto'; } };
+
+  function apply(v) {
+    const root = document.documentElement;
+    if (v === 'auto') delete root.dataset.theme; else root.dataset.theme = v;
+    // Browser chrome colour: forced to the chosen theme, or back to the per-scheme defaults
+    metas().forEach(m => {
+      m.dataset.auto = m.dataset.auto || m.content;
+      m.content = v === 'auto' ? m.dataset.auto : v === 'dark' ? '#161617' : '#f5f5f7';
+    });
+    const btn = $('#themeBtn');
+    if (!btn) return;
+    const label = options.find(o => o[0] === v)[1];
+    btn.innerHTML = Icons[v];
+    btn.setAttribute('aria-label', `Appearance: ${label}`);
+    btn.title = `Appearance: ${label}`;
+    $$('[data-theme-set]').forEach(o => o.setAttribute('aria-checked', String(o.dataset.themeSet === v)));
+  }
+  function set(v) {
+    try { v === 'auto' ? localStorage.removeItem(KEY) : localStorage.setItem(KEY, v); } catch {}
+    apply(v);
+  }
+
+  function init() {
+    const btn = $('#themeBtn'), menu = $('#themeMenu');
+    const items = () => $$('[data-theme-set]', menu);
+    const isOpen = () => menu.classList.contains('open');
+    function open() {
+      menu.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      (items().find(o => o.getAttribute('aria-checked') === 'true') || items()[0]).focus();
+    }
+    function close(refocus) {
+      if (!isOpen()) return;
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      if (refocus) btn.focus();
+    }
+    btn.addEventListener('click', () => (isOpen() ? close(true) : open()));
+    menu.addEventListener('click', e => {
+      const o = e.target.closest('[data-theme-set]');
+      if (!o) return;
+      set(o.dataset.themeSet);
+      close(true);
+    });
+    menu.addEventListener('keydown', e => {
+      const list = items(), k = list.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); list[(k + 1) % list.length].focus(); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); list[(k - 1 + list.length) % list.length].focus(); }
+      if (e.key === 'Home') { e.preventDefault(); list[0].focus(); }
+      if (e.key === 'End') { e.preventDefault(); list[list.length - 1].focus(); }
+      if (e.key === 'Escape') { e.stopPropagation(); close(true); }
+      if (e.key === 'Tab') close(false);
+    });
+    document.addEventListener('pointerdown', e => { if (!e.target.closest('.theme-wrap')) close(false); });
+    // Keep every open tab on the same choice
+    window.addEventListener('storage', e => { if (e.key === KEY) apply(read()); });
+    apply(read());
+  }
+
+  return { options, init };
+})();
 
 function renderShell() {
   const header = $('#site-header');
@@ -313,6 +387,13 @@ function renderShell() {
         <li data-fly="${n.key}"><a href="${n.href}">${n.label}</a><button class="gnav-chev" data-fly-toggle="${n.key}" aria-expanded="false" aria-label="${n.label} menu">${Icons.chevron}</button></li>`).join('')}
       </ul>
       <div class="gnav-actions">
+        <div class="theme-wrap">
+          <button class="icon-btn" id="themeBtn" aria-haspopup="menu" aria-expanded="false" aria-controls="themeMenu"></button>
+          <div class="theme-menu" id="themeMenu" role="menu" aria-label="Appearance">
+            <p class="theme-label" aria-hidden="true">Appearance</p>
+            ${Theme.options.map(([v, label]) => `<button class="theme-opt" role="menuitemradio" data-theme-set="${v}" tabindex="-1">${Icons[v]}${label}<span class="theme-check">${Icons.check}</span></button>`).join('')}
+          </div>
+        </div>
         <button class="icon-btn" data-panel="search" aria-label="Search" aria-expanded="false">${Icons.search}</button>
         <button class="icon-btn bag-btn" data-open-bag aria-label="Bag">${Icons.bag}<span class="bag-count" aria-hidden="true"></span></button>
         <button class="icon-btn menu-btn" data-panel="menu" aria-label="Menu" aria-expanded="false">${Icons.menu}</button>
@@ -351,7 +432,7 @@ function renderShell() {
       <p class="more-ways">More ways to shop: <a href="support.html#contact">Find a Halo Store</a> or <a href="support.html#contact">other retailer</a> near you. Or call 1800‑000‑0000.</p>
       <div class="footer-legal">
         <span>Copyright © ${new Date().getFullYear()} Halo Inc. All rights reserved.</span>
-        <span class="legal-links"><a href="support.html">Privacy Policy</a><a href="support.html">Terms of Use</a><a href="support.html#returns">Sales Policy</a><a href="support.html">Legal</a><a href="store.html">Site Map</a></span>
+        <span class="legal-links"><a href="legal.html#privacy">Privacy Policy</a><a href="legal.html#terms">Terms of Use</a><a href="legal.html#sales">Sales Policy</a><a href="legal.html#legal">Legal</a><a href="legal.html#sitemap">Site Map</a></span>
         <span class="region">India</span>
       </div>
     </div>
@@ -784,6 +865,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   NavPanel.initHover();
+  Theme.init();
 
   const page = document.body.dataset.page;
   if (window.Pages && Pages[page]) Pages[page]();
