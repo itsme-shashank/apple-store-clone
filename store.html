@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Store — Halo</title>
+  <meta name="description" content="Shop every Halo phone and accessory.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161617" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="store">
+  <div id="site-header"></div>
+
+  <main id="main" class="store">
+    <section class="store-hero wrap">
+      <h1 class="display">Store. <span>The best way to buy the products you love.</span></h1>
+      <aside class="store-help">
+        <p><span data-icon="chat"></span><span><strong>Need shopping help?</strong><button class="pill-link" data-help>Ask a Specialist ›</button></span></p>
+        <p><span data-icon="store"></span><span><strong>Visit a Halo Store</strong><a class="pill-link" href="support.html#contact">Find one near you ›</a></span></p>
+      </aside>
+    </section>
+    <nav class="wrap cat-strip" id="catStrip" aria-label="Shop by category"></nav>
+
+    <div id="storeShelves">
+      <section class="section shelf tight" aria-labelledby="h-latest">
+        <div class="wrap section-head"><h2 class="title" id="h-latest">The latest. <span class="muted">Take a look at what’s new right now.</span></h2></div>
+        <div class="shelf-track wide" id="latestTrack"></div>
+      </section>
+      <section class="section shelf tight" aria-labelledby="h-help">
+        <div class="wrap section-head"><h2 class="title" id="h-help">Help is here. <span class="muted">Whenever and however you need it.</span></h2></div>
+        <div class="shelf-track" id="helpTrack"></div>
+      </section>
+      <section class="section shelf tight" aria-labelledby="h-diff">
+        <div class="wrap section-head"><h2 class="title" id="h-diff">The Halo Store difference. <span class="muted">Even more reasons to shop with us.</span></h2></div>
+        <div class="shelf-track" id="whyTrack"></div>
+      </section>
+      <section class="wrap quick-links" aria-labelledby="h-quick">
+        <h2 class="title" id="h-quick">Quick Links</h2>
+        <div class="ql-pills">
+          <a href="support.html#contact">Find a Store</a><a href="support.html#orders">Order Status</a>
+          <a href="support.html">Shopping Help</a><a href="support.html#returns">Returns</a>
+          <a href="saves.html">Your Saves</a><a href="compare.html">Compare Models</a>
+        </div>
+      </section>
+      <div class="wrap"><h2 class="title all-title" id="all">All products.</h2></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="wrap toolbar-inner">
+        <div class="chips" id="chips" role="group" aria-label="Category"></div>
+        <label class="search-field">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input type="search" id="q" placeholder="Filter products" aria-label="Filter products" autocomplete="off">
+        </label>
+        <select class="select" id="sort" aria-label="Sort by">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: low to high</option>
+          <option value="price-desc">Price: high to low</option>
+          <option value="name">Name</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <p class="result-count" id="count" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/motion.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/store.js"></script>
+</body>
+</html>

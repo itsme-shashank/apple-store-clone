@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Halo — Phones and accessories</title>
+  <meta name="description" content="Shop Halo phones, audio, chargers and cases. Free delivery and no-cost EMI.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161617" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="home">
+  <div id="site-header"></div>
+
+  <main id="main">
+    <p class="ribbon">Get up to ₹10,000 off when you trade in an eligible phone. <a href="product.html?id=halo-16-pro">Shop Halo 16 Pro ›</a></p>
+
+    <!-- Hero: Halo 16 Pro -->
+    <section class="tile dark" aria-labelledby="h-pro">
+      <div class="hero-gradient" aria-hidden="true"></div>
+      <p class="eyebrow rise">New</p>
+      <h1 class="display rise" id="h-pro">Halo 16 Pro</h1>
+      <p class="subhead rise d1">Titanium. Forged in light.</p>
+      <div class="ctas rise d1">
+        <a class="pill-btn" href="product.html?id=halo-16-pro">Buy</a>
+        <a class="pill-link" href="#compare">Compare models <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <p class="tile-price muted rise d1" data-price="halo-16-pro"></p>
+      <div class="tile-art rise d2" data-duo="halo-16-pro" data-hex="#bfa48f"></div>
+    </section>
+
+    <!-- Halo 16 -->
+    <section class="tile white" aria-labelledby="h-16">
+      <h2 class="display reveal" id="h-16">Halo 16</h2>
+      <p class="subhead reveal">Colour. Bright as ever.</p>
+      <div class="ctas reveal">
+        <a class="pill-btn" href="product.html?id=halo-16">Buy</a>
+        <a class="pill-link" href="store.html?c=phones">All phones <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <p class="tile-price muted reveal" data-price="halo-16"></p>
+      <div class="tile-art reveal" data-fan="halo-16"></div>
+    </section>
+
+    <!-- Grid of smaller tiles, rendered from js/home.js -->
+    <div class="tile-grid" id="tileGrid"></div>
+
+    <section class="statement">
+      <p class="headline reveal">Designed to be held. <span class="grad">Built to be loved.</span></p>
+    </section>
+
+    <!-- Halo TV+: auto-advancing carousel -->
+    <section class="tvplus" id="tv" aria-labelledby="h-tv">
+      <div class="wrap section-head"><h2 class="headline reveal" id="h-tv">Halo TV+. <span>Stories worth staying up for.</span></h2></div>
+      <div class="tv-viewport" id="tvViewport" role="region" aria-roledescription="carousel" aria-label="Halo TV+ shows">
+        <div class="tv-track" id="tvTrack"></div>
+      </div>
+      <div class="tv-ui">
+        <div class="tv-dots" id="tvDots" role="group" aria-label="Choose a show"></div>
+        <button class="tv-play" id="tvPlay"></button>
+      </div>
+    </section>
+
+    <!-- Compare -->
+    <section class="section alt shelf" id="compare" aria-labelledby="h-compare">
+      <div class="wrap section-head">
+        <div><h2 class="headline reveal" id="h-compare">Which Halo is right for you?</h2>
+        <a class="pill-link reveal" href="compare.html">Compare all models <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+              </div>
+      <div class="shelf-track" id="compareTrack"></div>
+    </section>
+
+    <!-- Accessories -->
+    <section class="section shelf" aria-labelledby="h-acc">
+      <div class="wrap section-head">
+        <h2 class="headline reveal" id="h-acc">Accessories. <span>Essentials that pair perfectly.</span></h2>
+      </div>
+      <div class="shelf-track" id="accTrack"></div>
+    </section>
+
+    <!-- Why buy -->
+    <section class="section alt shelf" id="why" aria-labelledby="h-why">
+      <div class="wrap section-head">
+        <h2 class="headline reveal" id="h-why">The Halo Store difference. <span>Even more reasons to shop with us.</span></h2>
+      </div>
+      <div class="shelf-track" id="whyTrack"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/motion.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Compare models — Halo</title>
+  <meta name="description" content="Compare Halo models side by side.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161617" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="compare">
+  <div id="site-header"></div>
+
+  <main id="main" class="compare-page">
+    <div class="wrap">
+      <section class="compare-hero">
+        <h1 class="display">Compare <span id="cmpCat">Phone</span> models.</h1>
+        <div class="segmented" role="tablist" aria-label="Product family" id="cmpTabs"></div>
+      </section>
+      <div class="cmp-pickers" id="cmpPickers"></div>
+      <div id="cmpBody"></div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/motion.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/compare.js"></script>
+</body>
+</html>

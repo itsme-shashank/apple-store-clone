@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Entertainment — Halo</title>
+  <meta name="description" content="Halo TV+, Halo Music and Halo Arcade. Watch, listen and play on every Halo device.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161617" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="entertainment">
+  <div id="site-header"></div>
+
+  <main id="main">
+    <div class="wrap">
+      <section class="support-hero">
+        <h1 class="display">Halo Entertainment</h1>
+        <p class="subhead">Watch. Listen. Play. All on Halo.</p>
+        <nav class="ent-jump" aria-label="Services">
+          <a class="chip" href="#tv">Halo TV+</a>
+          <a class="chip" href="#music">Halo Music</a>
+          <a class="chip" href="#arcade">Halo Arcade</a>
+          <a class="chip" href="support.html#entertainment">Support</a>
+        </nav>
+      </section>
+    </div>
+
+    <!-- Halo TV+: the same auto-advancing carousel as the home page -->
+    <section class="tvplus" id="tv" aria-labelledby="h-tv">
+      <div class="wrap section-head">
+        <div><h2 class="headline reveal" id="h-tv">Halo TV+. <span>Stories worth staying up for.</span></h2>
+          <p class="ent-plan reveal">₹99/mo. after a free 7‑day trial. <button class="pill-link" data-sub="Halo TV+">Try it free</button></p></div>
+      </div>
+      <div class="tv-viewport" id="tvViewport" role="region" aria-roledescription="carousel" aria-label="Halo TV+ shows">
+        <div class="tv-track" id="tvTrack"></div>
+      </div>
+      <div class="tv-ui">
+        <div class="tv-dots" id="tvDots" role="group" aria-label="Choose a show"></div>
+        <button class="tv-play" id="tvPlay"></button>
+      </div>
+    </section>
+
+    <section class="section shelf" id="music" aria-labelledby="h-music">
+      <div class="wrap section-head">
+        <div><h2 class="headline reveal" id="h-music">Halo Music. <span>100 million songs. Zero ads.</span></h2>
+          <p class="ent-plan reveal">₹119/mo. after a free 1‑month trial. <button class="pill-link" data-sub="Halo Music">Try it free</button></p></div>
+      </div>
+      <div class="shelf-track" id="musicTrack"></div>
+    </section>
+
+    <section class="section alt shelf" id="arcade" aria-labelledby="h-arcade">
+      <div class="wrap section-head">
+        <div><h2 class="headline reveal" id="h-arcade">Halo Arcade. <span>200+ games. No ads, no in‑app purchases.</span></h2>
+          <p class="ent-plan reveal">₹99/mo. after a free 1‑month trial. <button class="pill-link" data-sub="Halo Arcade">Try it free</button></p></div>
+      </div>
+      <div class="shelf-track wide" id="arcadeTrack"></div>
+    </section>
+
+    <section class="section shelf" aria-labelledby="h-devices">
+      <div class="wrap section-head"><h2 class="headline reveal" id="h-devices">Watch and play better. <span>Made for Halo services.</span></h2></div>
+      <div class="shelf-track" id="entDevices"></div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/motion.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
+  <script src="js/entertainment.js"></script>
+</body>
+</html>
