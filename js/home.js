@@ -115,7 +115,7 @@ function initTV() {
   const n = SHOWS.length, gap = 16;
   track.innerHTML = SHOWS.map((s, k) => `
     <article class="tv-slide f-${s.font}" style="--a:${s.a};--b:${s.b}" role="group" aria-roledescription="slide" aria-label="${k + 1} of ${n}: ${esc(s.title)}">
-      <div class="tv-art" aria-hidden="true"><span class="orb"></span><span class="orb two"></span><span class="grain"></span></div>
+      <div class="tv-art" aria-hidden="true">${s.img ? `<img src="${s.img}" alt="" ${k ? 'loading="lazy" ' : ''}decoding="async">` : ''}<span class="orb"></span><span class="orb two"></span><span class="grain"></span></div>
       <div class="tv-copy">
         <p class="tv-title">${esc(s.title)}</p>
         <div class="tv-meta">
@@ -152,7 +152,7 @@ function initTV() {
     void dots[i].offsetWidth;
     dots[i].classList.add('active');
     anim && anim.stop();
-    anim = Motion.spring({ from: x, to: target(i), velocity, damping, response: 0.6, onUpdate: setX });
+    anim = Motion.spring({ from: x, to: target(i), velocity, damping, response: 0.45, onUpdate: setX });
   }
 
   dots.forEach(d => {

@@ -1,6 +1,6 @@
 # Apple Store Clone — Halo Store
 
-An apple.com‑style e‑commerce storefront for phones, laptops, tablets, watches, audio and accessories, built with **plain HTML, CSS and JavaScript**. No framework, no build step, no server, and no image files — every product is drawn in SVG.
+An apple.com‑style e‑commerce storefront for phones, laptops, tablets, watches, audio and accessories, built with **plain HTML, CSS and JavaScript**. No framework, no build step and no server. Every product is drawn in SVG; the only image files are the photos on the Halo TV+, Music and Arcade cards.
 
 The store sells products from **Halo**, a fictional brand. Halo's lineup mirrors Apple's: Phone, Book, Pad, Watch, Vision, Audio, Home, Entertainment and Accessories.
 
@@ -72,6 +72,7 @@ To host it, upload the folder to any static host:
 │   ├── motion.js      # spring physics, momentum projection, rubber-banding, drag helper
 │   ├── app.js         # shared shell: nav, dropdowns, bag, saves, popups, toasts, footer
 │   └── home.js, store.js, product.js, compare.js, bag.js, saves.js, support.js, entertainment.js, legal.js
+├── images/            # TV+, Music and Arcade photos, with CREDITS.md
 ├── docs/screenshots/
 └── favicon.svg
 ```
@@ -94,5 +95,5 @@ Everything the store shows comes from [`js/data.js`](js/data.js). Add a product 
 
 This is a **design study and portfolio project**, not a real shop. No orders are placed and no payment is collected; checkout ends at a demo confirmation.
 
-"Halo" and all product names are fictional. The project is **not affiliated with, endorsed by, or sponsored by Apple Inc.** It imitates the general layout and interaction patterns of apple.com for learning purposes only. It uses no Apple logos, product images or assets. Apple, iPhone, Mac, iPad and apple.com are trademarks of Apple Inc.
+"Halo" and all product names are fictional. The project is **not affiliated with, endorsed by, or sponsored by Apple Inc.** It imitates the general layout and interaction patterns of apple.com for learning purposes only. It uses no Apple logos, product images or assets. The photos on the TV+, Music and Arcade cards are openly licensed; their authors and licences are listed in [`images/CREDITS.md`](images/CREDITS.md). Apple, iPhone, Mac, iPad and apple.com are trademarks of Apple Inc.
 

@@ -492,12 +492,12 @@ const NAV_MORE = {
 
 /* ---------------- Entertainment carousel (made-up shows) ---------------- */
 const SHOWS = [
-  { title: 'Low Orbit', genre: 'Sci‑Fi', line: 'Six astronauts. One way home.', a: '#0b1e3f', b: '#e86a33', font: 'display' },
-  { title: 'The Lantern Room', genre: 'Thriller', line: 'Every light hides a secret.', a: '#1a1208', b: '#f2b84b', font: 'serif' },
-  { title: 'Monsoon Season', genre: 'Drama', line: 'A family. A storm. A reckoning.', a: '#0e2a2a', b: '#5fc3b0', font: 'serif' },
-  { title: 'Ninth Inning', genre: 'Comedy', line: 'The worst team in the league is back.', a: '#2a0f2e', b: '#ff6f91', font: 'display' },
-  { title: 'Glasshouse', genre: 'Mystery', line: 'Nothing stays hidden for long.', a: '#101418', b: '#9fb4c7', font: 'serif' },
-  { title: 'Saltwater Kings', genre: 'Documentary', line: 'Life at the edge of the ocean.', a: '#06222e', b: '#3aa0d8', font: 'display' }
+  { title: 'Low Orbit', genre: 'Sci‑Fi', line: 'Six astronauts. One way home.', a: '#0b1e3f', b: '#e86a33', font: 'display', img: 'images/tv/low-orbit.jpg' },
+  { title: 'The Lantern Room', genre: 'Thriller', line: 'Every light hides a secret.', a: '#1a1208', b: '#f2b84b', font: 'serif', img: 'images/tv/the-lantern-room.jpg' },
+  { title: 'Monsoon Season', genre: 'Drama', line: 'A family. A storm. A reckoning.', a: '#0e2a2a', b: '#5fc3b0', font: 'serif', img: 'images/tv/monsoon-season.jpg' },
+  { title: 'Ninth Inning', genre: 'Comedy', line: 'The worst team in the league is back.', a: '#2a0f2e', b: '#ff6f91', font: 'display', img: 'images/tv/ninth-inning.jpg' },
+  { title: 'Glasshouse', genre: 'Mystery', line: 'Nothing stays hidden for long.', a: '#101418', b: '#9fb4c7', font: 'serif', img: 'images/tv/glasshouse.jpg' },
+  { title: 'Saltwater Kings', genre: 'Documentary', line: 'Life at the edge of the ocean.', a: '#06222e', b: '#3aa0d8', font: 'display', img: 'images/tv/saltwater-kings.jpg' }
 ];
 
 /* ---------------- Store: "The latest" shelf ---------------- */
@@ -512,16 +512,16 @@ const LATEST = [
 
 /* ---------------- Entertainment page: Halo Music and Halo Arcade (made-up titles) ---------------- */
 const ALBUMS = [
-  { title: 'Night Bus Home', artist: 'Mira Vale', kind: 'Album', a: '#2b1055', b: '#d53369' },
-  { title: 'Chai & Rain', artist: 'Lofi Room', kind: 'Playlist', a: '#3a2618', b: '#e0a96d' },
-  { title: 'Monsoon Season (Score)', artist: 'Arun Dev', kind: 'Soundtrack', a: '#0e2a2a', b: '#5fc3b0' },
-  { title: 'Glass Cities', artist: 'Northlight', kind: 'Album', a: '#101418', b: '#9fb4c7' },
-  { title: 'Morning Run', artist: 'Halo Music', kind: 'Playlist', a: '#1f3b08', b: '#b6e35a' },
-  { title: 'Golden Hour', artist: 'Sana & the Tides', kind: 'Album', a: '#40210f', b: '#f2b84b' }
+  { title: 'Night Bus Home', artist: 'Mira Vale', kind: 'Album', a: '#2b1055', b: '#d53369', img: 'images/music/night-bus-home.jpg' },
+  { title: 'Chai & Rain', artist: 'Lofi Room', kind: 'Playlist', a: '#3a2618', b: '#e0a96d', img: 'images/music/chai-and-rain.jpg' },
+  { title: 'Monsoon Season (Score)', artist: 'Arun Dev', kind: 'Soundtrack', a: '#0e2a2a', b: '#5fc3b0', img: 'images/music/monsoon-score.jpg' },
+  { title: 'Glass Cities', artist: 'Northlight', kind: 'Album', a: '#101418', b: '#9fb4c7', img: 'images/music/glass-cities.jpg' },
+  { title: 'Morning Run', artist: 'Halo Music', kind: 'Playlist', a: '#1f3b08', b: '#b6e35a', img: 'images/music/morning-run.jpg' },
+  { title: 'Golden Hour', artist: 'Sana & the Tides', kind: 'Album', a: '#40210f', b: '#f2b84b', img: 'images/music/golden-hour.jpg' }
 ];
 const GAMES = [
-  { title: 'Paper Comets', genre: 'Arcade', line: 'Fold, fling and chase the stars.', a: '#0b1e3f', b: '#e86a33' },
-  { title: 'Tidepool', genre: 'Puzzle', line: 'Calm puzzles that ebb and flow.', a: '#06222e', b: '#3aa0d8' },
-  { title: 'Rickshaw Rally', genre: 'Racing', line: 'Race through monsoon streets.', a: '#2a0f2e', b: '#ff6f91' },
-  { title: 'Lantern Keep', genre: 'Adventure', line: 'Light the way through a sleeping castle.', a: '#1a1208', b: '#f2b84b' }
+  { title: 'Paper Comets', genre: 'Arcade', line: 'Fold, fling and chase the stars.', a: '#0b1e3f', b: '#e86a33', img: 'images/arcade/paper-comets.jpg' },
+  { title: 'Tidepool', genre: 'Puzzle', line: 'Calm puzzles that ebb and flow.', a: '#06222e', b: '#3aa0d8', img: 'images/arcade/tidepool.jpg' },
+  { title: 'Rickshaw Rally', genre: 'Racing', line: 'Race through monsoon streets.', a: '#2a0f2e', b: '#ff6f91', img: 'images/arcade/rickshaw-rally.jpg' },
+  { title: 'Lantern Keep', genre: 'Adventure', line: 'Light the way through a sleeping castle.', a: '#1a1208', b: '#f2b84b', img: 'images/arcade/lantern-keep.jpg' }
 ];
