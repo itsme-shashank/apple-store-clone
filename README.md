@@ -33,7 +33,8 @@ To host it, upload the folder to any static host:
 | `compare.html` | Compare up to three models side by side, with specs lined up row by row |
 | `bag.html` | Bag with quantities, undo, trade‑in credit and a checkout form that checks each field as you go |
 | `saves.html` | Products saved for later |
-| `support.html` | Topic shortcuts and a searchable FAQ |
+| `support.html` | Topic shortcuts and a searchable FAQ, including Halo Care+, Trade In, Education, Entertainment, Accessories and Gift Cards |
+| `entertainment.html` | Halo TV+ carousel, Halo Music album shelf, Halo Arcade game shelf, and the entertainment devices; the menu's "More from Entertainment" links jump to each section |
 
 ## Features
 
@@ -62,14 +63,14 @@ To host it, upload the folder to any static host:
 
 ```
 ├── index.html, store.html, product.html, compare.html,
-│   bag.html, saves.html, support.html
+│   bag.html, saves.html, support.html, entertainment.html
 ├── css/styles.css     # design tokens, components, light/dark and accessibility media queries
 ├── js/
-│   ├── data.js        # catalogue, prices, trade-in values, menus, shows — edit this to change the store
+│   ├── data.js        # catalogue, prices, trade-in values, menus, shows, albums, games — edit this to change the store
 │   ├── art.js         # SVG product illustrations
 │   ├── motion.js      # spring physics, momentum projection, rubber-banding, drag helper
 │   ├── app.js         # shared shell: nav, dropdowns, bag, saves, popups, toasts, footer
-│   └── home.js, store.js, product.js, compare.js, bag.js, saves.js, support.js
+│   └── home.js, store.js, product.js, compare.js, bag.js, saves.js, support.js, entertainment.js
 ├── docs/screenshots/
 └── favicon.svg
 ```
