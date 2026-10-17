@@ -16,7 +16,7 @@ Pages.home = () => {
     { id: 'halo-sphere', sub: 'Sound that fills the room. A smart home hub inside.', theme: 'dark', hex: '#ececec' },
     { id: 'halo-tv-4k', sub: 'Cinematic in every sense.', theme: 'white' },
     { id: 'halo-pods-max', sub: 'Immersive, over‑ear sound. Five new colours.', theme: 'dark', hex: '#f0a77c' },
-    { id: 'magring', title: 'MagRing', sub: 'Snap on a charger. Snap on a battery. Snap on a case.', href: 'store.html?c=accessories', cta: 'Shop accessories' }
+    { id: 'magring', title: 'MagRing', sub: 'Snap on a charger. Snap on a battery. Snap on a case.', href: link('store.html?c=accessories'), cta: 'Shop accessories' }
   ];
   $('#tileGrid').innerHTML = tiles.map(t => {
     const p = getProduct(t.id);
@@ -32,11 +32,11 @@ Pages.home = () => {
     } else {
       art = `<div class="tile-art reveal art-${p.art}">${Art.render(p, { hex: t.hex })}</div>`;
     }
-    const buy = t.href || `product.html?id=${p.id}`;
+    const buy = t.href || link(`product.html?id=${p.id}`);
     const second = t.add
       ? `<button class="pill-btn small ghost" data-add="${p.id}">Add to Bag</button>`
-      : t.href ? `<a class="pill-btn small ghost" href="product.html?id=silicone-case">See cases</a>`
-      : `<a class="pill-btn small ghost" href="product.html?id=${p.id}#highlights">Learn more</a>`;
+      : t.href ? `<a class="pill-btn small ghost" href="${link(`product.html?id=silicone-case`)}">See cases</a>`
+      : `<a class="pill-btn small ghost" href="${link(`product.html?id=${p.id}#highlights`)}">Learn more</a>`;
     return `
       <section class="tile ${t.theme || ''}" aria-label="${esc(title)}">
         ${p && p.badge ? `<p class="eyebrow reveal">${esc(p.badge)}</p>` : ''}
@@ -77,13 +77,13 @@ Pages.home = () => {
   const key = (p, label) => (p.specs.find(s => s[0] === label) || [, '—'])[1];
   $('#compareTrack').innerHTML = phones.map(p => `
     <article class="compare-card">
-      <a class="phone-mini" href="product.html?id=${p.id}" aria-label="${esc(p.name)}">${Art.render(p)}</a>
+      <a class="phone-mini" href="${link(`product.html?id=${p.id}`)}" aria-label="${esc(p.name)}">${Art.render(p)}</a>
       ${colorDots(p)}
       ${p.badge ? `<p class="eyebrow" style="margin-top:14px">${esc(p.badge)}</p>` : ''}
       <h3>${esc(p.name)}</h3>
       <p class="tag">${esc(p.tagline)}</p>
       <p class="price">From ${fmt(p.price)}</p>
-      <a class="pill-btn small" href="product.html?id=${p.id}">Buy</a>
+      <a class="pill-btn small" href="${link(`product.html?id=${p.id}`)}">Buy</a>
       <ul>
         <li><strong>${esc(key(p, 'Display').split(',')[0])}</strong>Display</li>
         <li><strong>${esc(key(p, 'Chip').split(',')[0])}</strong>Chip</li>
@@ -115,7 +115,7 @@ function initTV() {
   const n = SHOWS.length, gap = 16;
   track.innerHTML = SHOWS.map((s, k) => `
     <article class="tv-slide f-${s.font}" style="--a:${s.a};--b:${s.b}" role="group" aria-roledescription="slide" aria-label="${k + 1} of ${n}: ${esc(s.title)}">
-      <div class="tv-art" aria-hidden="true">${s.img ? `<img src="${s.img}" alt="" ${k ? 'loading="lazy" ' : ''}decoding="async">` : ''}<span class="orb"></span><span class="orb two"></span><span class="grain"></span></div>
+      <div class="tv-art" aria-hidden="true">${s.img ? `<img src="${asset(s.img)}" alt="" ${k ? 'loading="lazy" ' : ''}decoding="async">` : ''}<span class="orb"></span><span class="orb two"></span><span class="grain"></span></div>
       <div class="tv-copy">
         <p class="tv-title">${esc(s.title)}</p>
         <div class="tv-meta">

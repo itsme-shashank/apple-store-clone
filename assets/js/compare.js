@@ -34,13 +34,13 @@ Pages.compare = () => {
     $('#cmpBody').innerHTML = `
       <div class="cmp-cols cmp-heads" ${cols}>${chosen.map(p => `
         <div class="cmp-head">
-          <a class="cmp-art" href="product.html?id=${p.id}" data-art-id="${p.id}">${Art.render(p)}</a>
+          <a class="cmp-art" href="${link(`product.html?id=${p.id}`)}" data-art-id="${p.id}">${Art.render(p)}</a>
           ${colorDots(p, 8)}
           ${p.badge ? `<p class="eyebrow">${esc(p.badge)}</p>` : ''}
           <h2>${esc(p.name)}</h2>
           <p class="muted">${esc(p.tagline)}</p>
           <p class="cmp-price">From ${fmt(p.price)}</p>
-          <a class="pill-btn small" href="product.html?id=${p.id}">Buy</a>
+          <a class="pill-btn small" href="${link(`product.html?id=${p.id}`)}">Buy</a>
         </div>`).join('')}</div>
       <div class="cmp-row"><p class="cmp-label">Finishes</p><div class="cmp-cols" ${cols}>${chosen.map(p => `<p>${p.colors.map(x => esc(x.name)).join(', ')}</p>`).join('')}</div></div>
       ${optionsOf(chosen[0]) ? `<div class="cmp-row"><p class="cmp-label">${chosen[0].storage ? 'Capacity' : 'Sizes'}</p><div class="cmp-cols" ${cols}>${chosen.map(p => `<p>${(optionsOf(p) || []).map(o => o.label).join(', ') || '—'}</p>`).join('')}</div></div>` : ''}

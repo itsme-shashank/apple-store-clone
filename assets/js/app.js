@@ -224,7 +224,7 @@ function cardHTML(p) {
   const isPhone = ['phones', 'book', 'pad', 'watch', 'vision'].includes(p.category); // configure before buying
   return `
   <article class="card" data-id="${p.id}">
-    <a class="card-link" href="product.html?id=${p.id}">
+    <a class="card-link" href="${link(`product.html?id=${p.id}`)}">
       <div class="card-art" data-art>${Art.render(p)}</div>
       <div class="card-body">
         ${p.badge ? `<p class="eyebrow">${esc(p.badge)}</p>` : ''}
@@ -234,16 +234,16 @@ function cardHTML(p) {
       </div>
     </a>
     ${isPhone
-      ? `<a class="pill-btn small card-cta" href="product.html?id=${p.id}">Buy</a>`
+      ? `<a class="pill-btn small card-cta" href="${link(`product.html?id=${p.id}`)}">Buy</a>`
       : `<button class="add-btn card-cta" data-add="${p.id}" aria-label="Add ${esc(p.name)} to bag">${Icons.plus}</button>`}
   </article>`;
 }
 
 /* ---------------- Header & footer ---------------- */
 const NAV = [
-  { key: 'store', label: 'Store', href: 'store.html' },
-  ...CATEGORIES.filter(c => c.id !== 'all').map(c => ({ key: c.id, label: c.label, href: `store.html?c=${c.id}` })),
-  { key: 'support', label: 'Support', href: 'support.html' }
+  { key: 'store', label: 'Store', href: link('store.html') },
+  ...CATEGORIES.filter(c => c.id !== 'all').map(c => ({ key: c.id, label: c.label, href: link(`store.html?c=${c.id}`) })),
+  { key: 'support', label: 'Support', href: link('support.html') }
 ];
 const COMPARABLE = ['phones', 'book', 'pad', 'watch'];
 
@@ -251,24 +251,24 @@ const COMPARABLE = ['phones', 'book', 'pad', 'watch'];
 function flyoutCols(key) {
   if (key === 'store') {
     return [
-      { label: 'Shop', big: true, links: [['store.html', 'Shop the Latest'], ...CATEGORIES.filter(c => c.id !== 'all').map(c => [`store.html?c=${c.id}`, c.label])] },
-      { label: 'Quick Links', links: [['support.html#orders', 'Order Status'], ['support.html', 'Shopping Help'], ['support.html#returns', 'Returns'], ['saves.html', 'Your Saves']] },
-      { label: 'Shop Special Stores', links: [['compare.html', 'Compare Models'], ['index.html#why', 'Why Buy from Halo'], ['store.html?c=accessories', 'Accessories']] }
+      { label: 'Shop', big: true, links: [[link('store.html'), 'Shop the Latest'], ...CATEGORIES.filter(c => c.id !== 'all').map(c => [link(`store.html?c=${c.id}`), c.label])] },
+      { label: 'Quick Links', links: [[link('support.html#orders'), 'Order Status'], [link('support.html'), 'Shopping Help'], [link('support.html#returns'), 'Returns'], [link('saves.html'), 'Your Saves']] },
+      { label: 'Shop Special Stores', links: [[link('compare.html'), 'Compare Models'], [link('index.html#why'), 'Why Buy from Halo'], [link('store.html?c=accessories'), 'Accessories']] }
     ];
   }
   if (key === 'support') {
     return [
-      { label: 'Explore Support', big: true, links: [['support.html#phones', 'Phone'], ['support.html#book', 'Book'], ['support.html#pad', 'Pad'], ['support.html#watch', 'Watch'], ['support.html#vision', 'Vision'], ['support.html#audio', 'Audio & Home']] },
-      { label: 'Get Help', links: [['support.html#orders', 'Orders & Delivery'], ['support.html#returns', 'Returns & Refunds'], ['support.html#payments', 'Payments & EMI'], ['support.html#contact', 'Contact Us']] },
-      { label: 'Helpful Topics', links: [['support.html?q=transfer', 'Transfer your data'], ['support.html?q=battery', 'Battery health'], ['support.html#contact', 'Repairs']] }
+      { label: 'Explore Support', big: true, links: [[link('support.html#phones'), 'Phone'], [link('support.html#book'), 'Book'], [link('support.html#pad'), 'Pad'], [link('support.html#watch'), 'Watch'], [link('support.html#vision'), 'Vision'], [link('support.html#audio'), 'Audio & Home']] },
+      { label: 'Get Help', links: [[link('support.html#orders'), 'Orders & Delivery'], [link('support.html#returns'), 'Returns & Refunds'], [link('support.html#payments'), 'Payments & EMI'], [link('support.html#contact'), 'Contact Us']] },
+      { label: 'Helpful Topics', links: [[link('support.html?q=transfer'), 'Transfer your data'], [link('support.html?q=battery'), 'Battery health'], [link('support.html#contact'), 'Repairs']] }
     ];
   }
   const cat = CATEGORIES.find(c => c.id === key);
   const items = PRODUCTS.filter(p => p.category === key);
   return [
-    { label: `Explore ${cat.label}`, big: true, links: [[`store.html?c=${key}`, `Explore All ${cat.label}`], ...items.slice(0, 7).map(p => [`product.html?id=${p.id}`, p.name])] },
-    { label: `Shop ${cat.label}`, links: [[`store.html?c=${key}`, `Shop ${cat.label}`], ...(key !== 'accessories' ? [['store.html?c=accessories', `${cat.label} Accessories`]] : []),
-      ...(COMPARABLE.includes(key) ? [[`compare.html?c=${key}`, `Compare ${cat.label} Models`]] : []), ['saves.html', 'Your Saves']] },
+    { label: `Explore ${cat.label}`, big: true, links: [[link(`store.html?c=${key}`), `Explore All ${cat.label}`], ...items.slice(0, 7).map(p => [link(`product.html?id=${p.id}`), p.name])] },
+    { label: `Shop ${cat.label}`, links: [[link(`store.html?c=${key}`), `Shop ${cat.label}`], ...(key !== 'accessories' ? [[link('store.html?c=accessories'), `${cat.label} Accessories`]] : []),
+      ...(COMPARABLE.includes(key) ? [[link(`compare.html?c=${key}`), `Compare ${cat.label} Models`]] : []), [link('saves.html'), 'Your Saves']] },
     { label: `More from ${cat.label}`, links: NAV_MORE[key] || [] }
   ];
 }
@@ -284,25 +284,25 @@ function breadcrumb() {
   const params = new URLSearchParams(location.search);
   const crumbs = [];
   if (page === 'store') {
-    crumbs.push(['store.html', 'Store']);
+    crumbs.push([link('store.html'), 'Store']);
     const c = CATEGORIES.find(x => x.id === params.get('c') && x.id !== 'all');
     if (c) crumbs.push([null, c.label]);
   } else if (page === 'product') {
     const p = getProduct(params.get('id'));
-    crumbs.push(['store.html', 'Store']);
+    crumbs.push([link('store.html'), 'Store']);
     if (p) {
       const c = CATEGORIES.find(x => x.id === p.category);
-      crumbs.push([`store.html?c=${c.id}`, c.label], [null, p.name]);
+      crumbs.push([link(`store.html?c=${c.id}`), c.label], [null, p.name]);
     }
-  } else if (page === 'compare') crumbs.push(['store.html', 'Store'], [null, 'Compare']);
+  } else if (page === 'compare') crumbs.push([link('store.html'), 'Store'], [null, 'Compare']);
   else if (page === 'bag') crumbs.push([null, 'Bag']);
   else if (page === 'saves') crumbs.push([null, 'Your Saves']);
   else if (page === 'support') crumbs.push([null, 'Support']);
   else if (page === 'legal') crumbs.push([null, 'Legal']);
-  else if (page === 'entertainment') crumbs.push(['store.html?c=entertainment', 'Entertainment'], [null, 'Services']);
+  else if (page === 'entertainment') crumbs.push([link('store.html?c=entertainment'), 'Entertainment'], [null, 'Services']);
   if (!crumbs.length) return '';
   return `<nav class="crumbs" aria-label="Breadcrumb"><ol>
-    <li><a href="index.html" aria-label="Halo home">${Icons.logo}</a></li>
+    <li><a href="${link(`index.html`)}" aria-label="Halo home">${Icons.logo}</a></li>
     ${crumbs.map(([h, t], i) => `<li>${h && i < crumbs.length - 1 ? `<a href="${h}">${esc(t)}</a>` : `<span aria-current="page">${esc(t)}</span>`}</li>`).join('')}
   </ol></nav>`;
 }
@@ -382,7 +382,7 @@ function renderShell() {
   <a class="skip" href="#main">Skip to content</a>
   <nav class="gnav" id="gnav" aria-label="Global">
     <div class="gnav-inner">
-      <a class="gnav-logo" href="index.html" aria-label="Halo home">${Icons.logo}<span>Halo</span></a>
+      <a class="gnav-logo" href="${link(`index.html`)}" aria-label="Halo home">${Icons.logo}<span>Halo</span></a>
       <ul class="gnav-links">${NAV.map(n => `
         <li data-fly="${n.key}"><a href="${n.href}">${n.label}</a><button class="gnav-chev" data-fly-toggle="${n.key}" aria-expanded="false" aria-label="${n.label} menu">${Icons.chevron}</button></li>`).join('')}
       </ul>
@@ -424,15 +424,15 @@ function renderShell() {
       <p class="fine">Halo is a fictional brand. This is a static demo storefront — no orders are placed and no payment is taken. Prices include GST.</p>
       ${breadcrumb()}
       <div class="footer-cols">
-        ${col('Shop and Learn', CATEGORIES.filter(c => c.id !== 'all').map(c => [`store.html?c=${c.id}`, c.label]))}
-        ${col('Popular', ['halo-16-pro', 'halo-book-air', 'halo-pad-pro', 'halo-watch-s2', 'halo-buds-pro', 'halo-vision-pro'].map(id => [`product.html?id=${id}`, getProduct(id).name]))}
-        ${col('Halo Store', [['store.html', 'Shop all products'], ['compare.html', 'Compare models'], ['saves.html', 'Your Saves'], ['bag.html', 'Review Bag'], ['support.html#orders', 'Order Status']])}
-        ${col('Support', [['support.html', 'Support home'], ['support.html#orders', 'Orders & delivery'], ['support.html#returns', 'Returns & refunds'], ['support.html#payments', 'Payments & EMI'], ['support.html#contact', 'Contact us']])}
+        ${col('Shop and Learn', CATEGORIES.filter(c => c.id !== 'all').map(c => [link(`store.html?c=${c.id}`), c.label]))}
+        ${col('Popular', ['halo-16-pro', 'halo-book-air', 'halo-pad-pro', 'halo-watch-s2', 'halo-buds-pro', 'halo-vision-pro'].map(id => [link(`product.html?id=${id}`), getProduct(id).name]))}
+        ${col('Halo Store', [[link('store.html'), 'Shop all products'], [link('compare.html'), 'Compare models'], [link('saves.html'), 'Your Saves'], [link('bag.html'), 'Review Bag'], [link('support.html#orders'), 'Order Status']])}
+        ${col('Support', [[link('support.html'), 'Support home'], [link('support.html#orders'), 'Orders & delivery'], [link('support.html#returns'), 'Returns & refunds'], [link('support.html#payments'), 'Payments & EMI'], [link('support.html#contact'), 'Contact us']])}
       </div>
-      <p class="more-ways">More ways to shop: <a href="support.html#contact">Find a Halo Store</a> or <a href="support.html#contact">other retailer</a> near you. Or call 1800‑000‑0000.</p>
+      <p class="more-ways">More ways to shop: <a href="${link(`support.html#contact`)}">Find a Halo Store</a> or <a href="${link(`support.html#contact`)}">other retailer</a> near you. Or call 1800‑000‑0000.</p>
       <div class="footer-legal">
         <span>Copyright © ${new Date().getFullYear()} Halo Inc. All rights reserved.</span>
-        <span class="legal-links"><a href="legal.html#privacy">Privacy Policy</a><a href="legal.html#terms">Terms of Use</a><a href="legal.html#sales">Sales Policy</a><a href="legal.html#legal">Legal</a><a href="legal.html#sitemap">Site Map</a></span>
+        <span class="legal-links"><a href="${link(`legal.html#privacy`)}">Privacy Policy</a><a href="${link(`legal.html#terms`)}">Terms of Use</a><a href="${link(`legal.html#sales`)}">Sales Policy</a><a href="${link(`legal.html#legal`)}">Legal</a><a href="${link(`legal.html#sitemap`)}">Site Map</a></span>
         <span class="region">India</span>
       </div>
     </div>
@@ -465,23 +465,23 @@ const NavPanel = (() => {
     if (!q) {
       return `<p class="panel-label">Quick links</p>
         <ul class="panel-links quick">
-          <li><a href="store.html">${Icons.chevron}Shop all products</a></li>
-          <li><a href="product.html?id=halo-16-pro">${Icons.chevron}Halo 16 Pro</a></li>
-          <li><a href="product.html?id=halo-book-air">${Icons.chevron}Halo Book Air</a></li>
-          <li><a href="compare.html">${Icons.chevron}Compare models</a></li>
-          <li><a href="saves.html">${Icons.chevron}Your Saves</a></li>
-          <li><a href="support.html">${Icons.chevron}Get support</a></li>
+          <li><a href="${link(`store.html`)}">${Icons.chevron}Shop all products</a></li>
+          <li><a href="${link(`product.html?id=halo-16-pro`)}">${Icons.chevron}Halo 16 Pro</a></li>
+          <li><a href="${link(`product.html?id=halo-book-air`)}">${Icons.chevron}Halo Book Air</a></li>
+          <li><a href="${link(`compare.html`)}">${Icons.chevron}Compare models</a></li>
+          <li><a href="${link(`saves.html`)}">${Icons.chevron}Your Saves</a></li>
+          <li><a href="${link(`support.html`)}">${Icons.chevron}Get support</a></li>
         </ul>`;
     }
     const hits = PRODUCTS.filter(p => [p.name, p.category, p.tagline].join(' ').toLowerCase().includes(q)).slice(0, 6);
     if (!hits.length) return `<p class="panel-label">No results for “${esc(q)}”. Try “case”, “watch” or “pro”.</p>`;
     return `<p class="panel-label">Products</p><ul class="panel-results">${hits.map(p => `
-      <li><a href="product.html?id=${p.id}"><span class="thumb">${Art.render(p)}</span><span><strong>${esc(p.name)}</strong><small>${fromPrice(p)}</small></span></a></li>`).join('')}</ul>`;
+      <li><a href="${link(`product.html?id=${p.id}`)}"><span class="thumb">${Art.render(p)}</span><span><strong>${esc(p.name)}</strong><small>${fromPrice(p)}</small></span></a></li>`).join('')}</ul>`;
   }
 
   function content(m) {
     if (m === 'search') {
-      return `<form class="panel-search" action="store.html" role="search">
+      return `<form class="panel-search" action="${link(`store.html`)}" role="search">
           ${Icons.search}<input type="search" name="q" id="navSearch" placeholder="Search Halo" autocomplete="off" aria-label="Search Halo">
         </form><div id="navResults">${searchResults('')}</div>`;
     }
@@ -489,7 +489,7 @@ const NavPanel = (() => {
     // Mobile menu: a root list that drills into each section's flyout
     return `<div class="mmenu" id="mmenu">
       <ul class="mm-root panel-links big">${NAV.map(n => `<li><button class="mm-item" data-drill="${n.key}">${n.label}${Icons.chevron}</button></li>`).join('')}
-        <li><a class="mm-item" href="bag.html">Bag</a></li><li><a class="mm-item" href="saves.html">Your Saves</a></li></ul>
+        <li><a class="mm-item" href="${link(`bag.html`)}">Bag</a></li><li><a class="mm-item" href="${link(`saves.html`)}">Your Saves</a></li></ul>
       <div class="mm-sub" id="mmSub" aria-hidden="true"></div>
     </div>`;
   }
@@ -665,9 +665,9 @@ function bagLineHTML(item, compact) {
   ].filter(Boolean);
   return `
   <li class="line ${compact ? 'compact' : ''}" data-key="${esc(key)}">
-    <a class="line-art" href="product.html?id=${p.id}">${Art.render(p, { hex: color && color.hex })}</a>
+    <a class="line-art" href="${link(`product.html?id=${p.id}`)}">${Art.render(p, { hex: color && color.hex })}</a>
     <div class="line-info">
-      <a class="line-name" href="product.html?id=${p.id}">${esc(p.name)}</a>
+      <a class="line-name" href="${link(`product.html?id=${p.id}`)}">${esc(p.name)}</a>
       ${meta ? `<p class="line-meta">${esc(meta)}</p>` : ''}
       ${extras.map(x => `<p class="line-extra">${esc(x)}</p>`).join('')}
       <div class="line-controls">
@@ -690,7 +690,7 @@ function renderBagSheet() {
   const items = Bag.items();
   if (!items.length) {
     body.innerHTML = `<div class="empty"><div class="empty-ring">${Icons.bag}</div><h3>Your bag is empty.</h3><p>Find something you’ll love.</p></div>`;
-    foot.innerHTML = `<a class="pill-btn block" href="store.html">Shop all products</a>`;
+    foot.innerHTML = `<a class="pill-btn block" href="${link(`store.html`)}">Shop all products</a>`;
     return;
   }
   body.innerHTML = `<ul class="lines">${items.map(i => bagLineHTML(i, true)).join('')}</ul>`;
@@ -699,9 +699,9 @@ function renderBagSheet() {
     ${credit ? `<div class="sum-row small"><span>Trade‑in credit</span><span>−${fmt(credit)}</span></div>` : ''}
     <div class="sum-row"><span>Total</span><strong>${fmt(total)}</strong></div>
     <p class="fine">Free delivery. Or ${emi(total)}/mo. for 24 mo. with no‑cost EMI.</p>
-    <a class="pill-btn block" href="bag.html#checkout">Check Out</a>
-    <a class="pill-btn block ghost" href="bag.html">Review Bag</a>
-    <p class="sheet-links"><a href="saves.html">Your Saves</a><a href="support.html#orders">Orders</a><a href="support.html">Help</a></p>`;
+    <a class="pill-btn block" href="${link(`bag.html#checkout`)}">Check Out</a>
+    <a class="pill-btn block ghost" href="${link(`bag.html`)}">Review Bag</a>
+    <p class="sheet-links"><a href="${link(`saves.html`)}">Your Saves</a><a href="${link(`support.html#orders`)}">Orders</a><a href="${link(`support.html`)}">Help</a></p>`;
 }
 
 /* Quantity & remove controls work the same in the sheet and on the bag page */

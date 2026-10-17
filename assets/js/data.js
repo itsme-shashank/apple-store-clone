@@ -1,3 +1,9 @@
+/* Paths: the home page sits at the site root, every other page in pages/, and CSS, JS and images in assets/.
+   Worked out from this script's own URL, so a link resolves the same from any page, on file:// or any host. */
+const SITE_ROOT = new URL('../../', document.currentScript.src).href;
+const link = path => (/^(#|[a-z]+:)/i.test(path) ? path : SITE_ROOT + (/^index\.html/.test(path) ? '' : 'pages/') + path);
+const asset = path => SITE_ROOT + 'assets/' + path;
+
 /* Catalogue. Everything the store renders comes from here — edit freely. */
 const CATEGORIES = [
   { id: 'all', label: 'All products' },
@@ -479,15 +485,15 @@ const ENGRAVABLE = ['halo-buds-pro', 'halo-buds-4', 'halo-tag', 'halo-pencil-pro
 
 /* ---------------- Global nav flyouts: "More from …" links, each with its own destination ---------------- */
 const NAV_MORE = {
-  phones: [['support.html#phones', 'Phone Support'], ['support.html#care', 'Halo Care+ for Phone'], ['support.html#tradein', 'Trade in your phone']],
-  book: [['support.html#book', 'Book Support'], ['support.html#care', 'Halo Care+ for Book'], ['support.html#education', 'Book for students']],
-  pad: [['support.html#pad', 'Pad Support'], ['support.html#care', 'Halo Care+ for Pad'], ['support.html#education', 'Pad for education']],
-  watch: [['support.html#watch', 'Watch Support'], ['support.html#care', 'Halo Care+ for Watch'], ['product.html?id=halo-watch-s2#highlights', 'Health on Watch']],
-  vision: [['support.html#vision', 'Vision Support'], ['support.html#vision', 'Book a demo'], ['product.html?id=halo-vision-pro#highlights', 'Spatial apps']],
-  audio: [['support.html#audio', 'Audio Support'], ['support.html#care', 'Halo Care+ for Audio'], ['product.html?id=halo-buds-pro#buy', 'Free engraving']],
-  home: [['support.html#audio', 'Home Support'], ['support.html#audio', 'Smart home setup'], ['support.html#care', 'Halo Care+ for Home']],
-  entertainment: [['entertainment.html#tv', 'Halo TV+'], ['entertainment.html#music', 'Halo Music'], ['entertainment.html#arcade', 'Halo Arcade'], ['support.html#entertainment', 'Entertainment Support']],
-  accessories: [['support.html#accessories', 'Accessories Support'], ['product.html?id=halo-pencil-pro#buy', 'Free engraving'], ['support.html#gifts', 'Gift cards']]
+  phones: [[link('support.html#phones'), 'Phone Support'], [link('support.html#care'), 'Halo Care+ for Phone'], [link('support.html#tradein'), 'Trade in your phone']],
+  book: [[link('support.html#book'), 'Book Support'], [link('support.html#care'), 'Halo Care+ for Book'], [link('support.html#education'), 'Book for students']],
+  pad: [[link('support.html#pad'), 'Pad Support'], [link('support.html#care'), 'Halo Care+ for Pad'], [link('support.html#education'), 'Pad for education']],
+  watch: [[link('support.html#watch'), 'Watch Support'], [link('support.html#care'), 'Halo Care+ for Watch'], [link('product.html?id=halo-watch-s2#highlights'), 'Health on Watch']],
+  vision: [[link('support.html#vision'), 'Vision Support'], [link('support.html#vision'), 'Book a demo'], [link('product.html?id=halo-vision-pro#highlights'), 'Spatial apps']],
+  audio: [[link('support.html#audio'), 'Audio Support'], [link('support.html#care'), 'Halo Care+ for Audio'], [link('product.html?id=halo-buds-pro#buy'), 'Free engraving']],
+  home: [[link('support.html#audio'), 'Home Support'], [link('support.html#audio'), 'Smart home setup'], [link('support.html#care'), 'Halo Care+ for Home']],
+  entertainment: [[link('entertainment.html#tv'), 'Halo TV+'], [link('entertainment.html#music'), 'Halo Music'], [link('entertainment.html#arcade'), 'Halo Arcade'], [link('support.html#entertainment'), 'Entertainment Support']],
+  accessories: [[link('support.html#accessories'), 'Accessories Support'], [link('product.html?id=halo-pencil-pro#buy'), 'Free engraving'], [link('support.html#gifts'), 'Gift cards']]
 };
 
 /* ---------------- Entertainment carousel (made-up shows) ---------------- */

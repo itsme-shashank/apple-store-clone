@@ -7,7 +7,7 @@ Pages.product = () => {
   if (!p) {
     root.innerHTML = `<div class="not-found"><h1 class="headline">We can’t find that product.</h1>
       <p class="muted" style="margin:12px 0 24px">It may have moved, or the link might be mistyped.</p>
-      <a class="pill-btn" href="store.html">Browse the Store</a></div>`;
+      <a class="pill-btn" href="${link(`store.html`)}">Browse the Store</a></div>`;
     return;
   }
 
@@ -49,10 +49,10 @@ Pages.product = () => {
   ${siblings.length > 1 ? `
   <nav class="chapternav" aria-label="${esc(cat.label)} models">
     <div class="chapternav-track">
-      ${siblings.map(x => `<a class="chap" href="product.html?id=${x.id}" ${x.id === p.id ? 'aria-current="page"' : ''}>
+      ${siblings.map(x => `<a class="chap" href="${link(`product.html?id=${x.id}`)}" ${x.id === p.id ? 'aria-current="page"' : ''}>
         <span class="chap-art">${Art.render(x)}</span><span class="chap-name">${esc(x.name)}</span>${x.badge === 'New' ? '<em>New</em>' : ''}</a>`).join('')}
-      ${comparable ? `<a class="chap" href="compare.html?c=${p.category}"><span class="chap-art icon">${Icons.compare}</span><span class="chap-name">Compare</span></a>` : ''}
-      <a class="chap" href="store.html?c=accessories"><span class="chap-art">${Art.render(getProduct('magring-charger'))}</span><span class="chap-name">Accessories</span></a>
+      ${comparable ? `<a class="chap" href="${link(`compare.html?c=${p.category}`)}"><span class="chap-art icon">${Icons.compare}</span><span class="chap-name">Compare</span></a>` : ''}
+      <a class="chap" href="${link(`store.html?c=accessories`)}"><span class="chap-art">${Art.render(getProduct('magring-charger'))}</span><span class="chap-name">Accessories</span></a>
     </div>
   </nav>` : ''}
   <div class="local-nav">
@@ -164,7 +164,7 @@ Pages.product = () => {
 
       <div class="help-card">
         <p><strong>Need shopping help?</strong><button class="pill-link" data-help>Chat with a Specialist ${Icons.chevron}</button></p>
-        ${comparable ? `<p><strong>Which ${esc(cat.label.toLowerCase())} is right for you?</strong><a class="pill-link" href="compare.html?c=${p.category}">Compare models ${Icons.chevron}</a></p>` : ''}
+        ${comparable ? `<p><strong>Which ${esc(cat.label.toLowerCase())} is right for you?</strong><a class="pill-link" href="${link(`compare.html?c=${p.category}`)}">Compare models ${Icons.chevron}</a></p>` : ''}
       </div>
     </div>
   </div>
@@ -293,7 +293,7 @@ Pages.product = () => {
   $('#saveBtn').addEventListener('click', () => {
     const on = Saves.toggle(bagItem());
     renderSave();
-    toast(on ? `${p.name} saved. Find it in Your Saves.` : 'Removed from Your Saves.', on ? 'View' : null, () => { location.href = 'saves.html'; });
+    toast(on ? `${p.name} saved. Find it in Your Saves.` : 'Removed from Your Saves.', on ? 'View' : null, () => { location.href = link('saves.html'); });
   });
 
   /* ---------- Trade-in & Care+ ---------- */

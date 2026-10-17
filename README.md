@@ -28,14 +28,14 @@ To host it, upload the folder to any static host:
 | Page | What it does |
 |---|---|
 | `index.html` | Hero banners, product tile grid, Halo TV+ carousel, model comparison shelf, accessories and "why buy" shelves |
-| `store.html` | Category icons, "The latest" and "Help is here" shelves, quick links, and every product with filters, search and sort (kept in the URL) |
-| `product.html?id=…` | Model strip, swipeable gallery, finish and storage picker, trade‑in, Halo Care+, free engraving with live preview, delivery check by PIN code, save for later, sticky buy bar |
-| `compare.html` | Compare up to three models side by side, with specs lined up row by row |
-| `bag.html` | Bag with quantities, undo, trade‑in credit and a checkout form that checks each field as you go |
-| `saves.html` | Products saved for later |
-| `support.html` | Topic shortcuts and a searchable FAQ, including Halo Care+, Trade In, Education, Entertainment, Accessories and Gift Cards |
-| `entertainment.html` | Halo TV+ carousel, Halo Music album shelf, Halo Arcade game shelf, and the entertainment devices; the menu's "More from Entertainment" links jump to each section |
-| `legal.html` | Privacy policy, terms of use, sales policy, legal notice and a site map built from the catalogue (linked from the footer) |
+| `pages/store.html` | Category icons, "The latest" and "Help is here" shelves, quick links, and every product with filters, search and sort (kept in the URL) |
+| `pages/product.html?id=…` | Model strip, swipeable gallery, finish and storage picker, trade‑in, Halo Care+, free engraving with live preview, delivery check by PIN code, save for later, sticky buy bar |
+| `pages/compare.html` | Compare up to three models side by side, with specs lined up row by row |
+| `pages/bag.html` | Bag with quantities, undo, trade‑in credit and a checkout form that checks each field as you go |
+| `pages/saves.html` | Products saved for later |
+| `pages/support.html` | Topic shortcuts and a searchable FAQ, including Halo Care+, Trade In, Education, Entertainment, Accessories and Gift Cards |
+| `pages/entertainment.html` | Halo TV+ carousel, Halo Music album shelf, Halo Arcade game shelf, and the entertainment devices; the menu's "More from Entertainment" links jump to each section |
+| `pages/legal.html` | Privacy policy, terms of use, sales policy, legal notice and a site map built from the catalogue (linked from the footer) |
 
 ## Features
 
@@ -63,23 +63,28 @@ To host it, upload the folder to any static host:
 ## Project structure
 
 ```
-├── index.html, store.html, product.html, compare.html,
-│   bag.html, saves.html, support.html, entertainment.html, legal.html
-├── css/styles.css     # design tokens, components, light/dark and accessibility media queries
-├── js/
-│   ├── data.js        # catalogue, prices, trade-in values, menus, shows, albums, games — edit this to change the store
-│   ├── art.js         # SVG product illustrations
-│   ├── motion.js      # spring physics, momentum projection, rubber-banding, drag helper
-│   ├── app.js         # shared shell: nav, dropdowns, bag, saves, popups, toasts, footer
-│   └── home.js, store.js, product.js, compare.js, bag.js, saves.js, support.js, entertainment.js, legal.js
-├── images/            # TV+, Music and Arcade photos, with CREDITS.md
-├── docs/screenshots/
-└── favicon.svg
+├── index.html             # home page
+├── pages/                 # every other page
+│   ├── store.html, product.html, compare.html, bag.html,
+│   └── saves.html, support.html, entertainment.html, legal.html
+├── assets/
+│   ├── css/styles.css     # design tokens, components, light/dark and accessibility media queries
+│   ├── js/
+│   │   ├── data.js        # catalogue, prices, trade-in values, menus, shows, albums, games, and the link()/asset() path helpers — edit this to change the store
+│   │   ├── art.js         # SVG product illustrations
+│   │   ├── motion.js      # spring physics, momentum projection, rubber-banding, drag helper
+│   │   ├── app.js         # shared shell: nav, dropdowns, bag, saves, popups, toasts, footer, appearance switch
+│   │   └── home.js, store.js, product.js, compare.js, bag.js, saves.js, support.js, entertainment.js, legal.js
+│   ├── images/            # TV+, Music and Arcade photos, with CREDITS.md
+│   └── favicon.svg
+└── docs/screenshots/      # README images
 ```
 
 ## Customise
 
-Everything the store shows comes from [`js/data.js`](js/data.js). Add a product to `PRODUCTS` and it appears in the store, search, menus, compare page and footer automatically.
+Links between pages go through `link('store.html')`, which resolves to the right place from the home page or from `pages/`, so you never write `../` by hand. Photos go through `asset('images/…')`.
+
+Everything the store shows comes from [`assets/js/data.js`](assets/js/data.js). Add a product to `PRODUCTS` and it appears in the store, search, menus, compare page and footer automatically.
 
 ```js
 {
@@ -95,5 +100,5 @@ Everything the store shows comes from [`js/data.js`](js/data.js). Add a product 
 
 This is a **design study and portfolio project**, not a real shop. No orders are placed and no payment is collected; checkout ends at a demo confirmation.
 
-"Halo" and all product names are fictional. The project is **not affiliated with, endorsed by, or sponsored by Apple Inc.** It imitates the general layout and interaction patterns of apple.com for learning purposes only. It uses no Apple logos, product images or assets. The photos on the TV+, Music and Arcade cards are openly licensed; their authors and licences are listed in [`images/CREDITS.md`](images/CREDITS.md). Apple, iPhone, Mac, iPad and apple.com are trademarks of Apple Inc.
+"Halo" and all product names are fictional. The project is **not affiliated with, endorsed by, or sponsored by Apple Inc.** It imitates the general layout and interaction patterns of apple.com for learning purposes only. It uses no Apple logos, product images or assets. The photos on the TV+, Music and Arcade cards are openly licensed; their authors and licences are listed in [`assets/images/CREDITS.md`](assets/images/CREDITS.md). Apple, iPhone, Mac, iPad and apple.com are trademarks of Apple Inc.
 

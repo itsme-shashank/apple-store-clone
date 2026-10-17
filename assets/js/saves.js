@@ -12,9 +12,9 @@ Pages.saves = () => {
       const meta = [p.colors.length > 1 ? color.name : null, i.option].filter(Boolean).join(' · ');
       return `
       <li class="save-item" data-id="${p.id}" data-color="${esc(i.color || '')}" data-option="${esc(i.option || '')}">
-        <a class="line-art" href="product.html?id=${p.id}">${Art.render(p, { hex: color.hex })}</a>
+        <a class="line-art" href="${link(`product.html?id=${p.id}`)}">${Art.render(p, { hex: color.hex })}</a>
         <div>
-          <a class="line-name" href="product.html?id=${p.id}">${esc(p.name)}</a>
+          <a class="line-name" href="${link(`product.html?id=${p.id}`)}">${esc(p.name)}</a>
           ${meta ? `<p class="line-meta">${esc(meta)}</p>` : ''}
           <p class="save-price">${fmt(p.price + (opt ? opt.add : 0))}</p>
         </div>
@@ -23,7 +23,7 @@ Pages.saves = () => {
           <button class="link-btn" data-save-remove>Remove</button>
         </div>
       </li>`;
-    }).join('') : `<li class="empty"><div class="empty-ring">${Icons.bookmark}</div><a class="pill-btn" href="store.html">Browse the Store</a></li>`;
+    }).join('') : `<li class="empty"><div class="empty-ring">${Icons.bookmark}</div><a class="pill-btn" href="${link(`store.html`)}">Browse the Store</a></li>`;
   }
 
   $('#savesList').addEventListener('click', e => {

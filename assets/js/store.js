@@ -71,7 +71,7 @@ Pages.store = () => {
   $('#latestTrack').innerHTML = LATEST.map(l => {
     const p = getProduct(l.id);
     return `
-    <a class="promo-card ${l.theme || ''}" href="product.html?id=${p.id}">
+    <a class="promo-card ${l.theme || ''}" href="${link(`product.html?id=${p.id}`)}">
       <p class="eyebrow">${esc(l.eyebrow)}</p>
       <h3>${esc(l.title)}</h3>
       <p class="promo-text">${esc(l.text)}</p>
@@ -81,9 +81,9 @@ Pages.store = () => {
   }).join('');
   $('#helpTrack').innerHTML = [
     [Icons.chat, 'Shop one on one with a Specialist.', 'Online or in a store.', 'data-help'],
-    [Icons.store, 'Visit a Halo Store.', 'Get hands‑on with every product and pick up today.', 'href="support.html#contact"'],
-    [Icons.gift, 'Join a free session.', 'Learn photography, music and more at Today at Halo.', 'href="support.html#contact"'],
-    [Icons.truck, 'Track your order.', 'See delivery status or change your address.', 'href="support.html#orders"']
+    [Icons.store, 'Visit a Halo Store.', 'Get hands‑on with every product and pick up today.', `href="${link(`support.html#contact`)}"`],
+    [Icons.gift, 'Join a free session.', 'Learn photography, music and more at Today at Halo.', `href="${link(`support.html#contact`)}"`],
+    [Icons.truck, 'Track your order.', 'See delivery status or change your address.', `href="${link(`support.html#orders`)}"`]
   ].map(([icon, h, t, attr]) => {
     const tag = attr.startsWith('href') ? 'a' : 'button';
     return `<${tag} class="help-tile" ${attr}>${icon}<h3>${h}</h3><p>${t}</p></${tag}>`;

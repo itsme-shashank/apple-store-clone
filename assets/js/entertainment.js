@@ -5,7 +5,7 @@ Pages.entertainment = () => {
   $('#musicTrack').innerHTML = ALBUMS.map(al => `
     <article class="album" style="--a:${al.a};--b:${al.b}">
       <button class="album-cover" data-play="${esc(al.title)}" aria-label="Play ${esc(al.title)} by ${esc(al.artist)}">
-        ${al.img ? `<img src="${al.img}" alt="" loading="lazy" decoding="async">` : '<span class="orb" aria-hidden="true"></span>'}
+        ${al.img ? `<img src="${asset(al.img)}" alt="" loading="lazy" decoding="async">` : '<span class="orb" aria-hidden="true"></span>'}
         <span class="album-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
       </button>
       <p class="album-kind">${esc(al.kind)}</p>
@@ -15,7 +15,7 @@ Pages.entertainment = () => {
 
   $('#arcadeTrack').innerHTML = GAMES.map(g => `
     <article class="game" style="--a:${g.a};--b:${g.b}">
-      <div class="game-art" aria-hidden="true">${g.img ? `<img src="${g.img}" alt="" loading="lazy" decoding="async">` : '<span class="orb"></span><span class="orb two"></span>'}</div>
+      <div class="game-art" aria-hidden="true">${g.img ? `<img src="${asset(g.img)}" alt="" loading="lazy" decoding="async">` : '<span class="orb"></span><span class="orb two"></span>'}</div>
       <div class="game-copy">
         <p class="album-kind">${esc(g.genre)}</p>
         <h3>${esc(g.title)}</h3>
